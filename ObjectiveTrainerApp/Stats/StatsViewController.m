@@ -30,6 +30,27 @@
 	// Do any additional setup after loading the view.
     
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    
+    //Load and display stats
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    //Easy Stats
+    int easyQuestionsAnswered = [userDefaults integerForKey:@"EasyQuestionsAnswered"];
+    int easyQuestionsAnsweredCorrectly = [userDefaults integerForKey:@"EasyQuestionsAnsweredCorrectly"];
+    self.easyQuestionsStats.text =[NSString stringWithFormat:@"Easy Questions %i / %i", easyQuestionsAnsweredCorrectly, easyQuestionsAnswered];
+    
+    //Medium Stats
+    int mediumQuestionsAnswered = [userDefaults integerForKey:@"MediumQuestionsAnswered"];
+    int mediumQuestionsAnsweredCorrectly = [userDefaults integerForKey:@"MediumQuestionsAnsweredCorrectly"];
+    self.mediumQuestionsStats.text =[NSString stringWithFormat:@"Medium Questions %i / %i", mediumQuestionsAnsweredCorrectly, mediumQuestionsAnswered];
+    
+    //Hard Stats
+    int hardQuestionsAnswered = [userDefaults integerForKey:@"HardQuestionsAnswered"];
+    int hardQuestionsAnsweredCorrectly = [userDefaults integerForKey:@"HardQuestionsAnsweredCorrectly"];
+    self.hardQuestionsStats.text =[NSString stringWithFormat:@"Hard Questions %i / %i", hardQuestionsAnsweredCorrectly, hardQuestionsAnswered];
+    
+    //Total Stats
+    self.totalQuestionsLabel.text = [NSString stringWithFormat:@"Total Questions Answered: %i", easyQuestionsAnswered + mediumQuestionsAnswered + hardQuestionsAnswered];
 }
 
 - (void)didReceiveMemoryWarning
