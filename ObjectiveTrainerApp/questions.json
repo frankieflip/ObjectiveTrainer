@@ -1,0 +1,52 @@
+{
+	"easy" : 
+	[
+		{
+		"type" : "mc",
+		"question" : "What is the name of the Simpsons next door neighbour?",
+		"answer0" : "Moe Szyslak",
+		"answer1" : "Edna Krabappel",
+		"answer2" : "Ned Flanders",
+		"correctanswer" : 2
+		},
+		{
+		"type" : "mc",
+		"question" : "In which town do the Simpsons reside?",
+		"answer0" : "America",
+		"answer1" : "Springfield",
+		"answer2" : "Spring Valley",
+		"correctanswer" : 1
+		},
+		{
+		"type" : "mc",
+		"question" : "What is the name of the school bus driver?",
+		"answer0" : "Otto",
+		"answer1" : "Barney",
+		"answer2" : "Hans",
+		"correctanswer" : 1
+		},
+		{
+		"type" : "image",
+		"imagename" : "EasyImage001",
+		"x_coord" : 100,
+		"y_coord" : 20,
+		"answerimage" : "EasyAnswerImage001"
+		},
+		{
+		"type" : "image",
+		"imagename" : "EasyImage001",
+		"x_coord" : 120,
+		"y_coord" : 70, 
+		"answerimage" : "EasyAnswerImage002"
+		},
+		{
+		"type" : "image",
+		"imagename" : "EasyImage001",
+		"x_coord" : 150,
+		"y_coord" : 30, 
+		"answerimage" : "EasyAnswerImage003"
+		}
+	],
+	"medium" : [],
+	"hard" : []
+}
