@@ -21,6 +21,8 @@
 
 //Properties for MCQuestions
 @property (weak, nonatomic) IBOutlet UILabel *questionHeaderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *answerHeaderLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *questionText;
 @property (weak, nonatomic) IBOutlet UIButton *questionMCAnswer1;
 @property (weak, nonatomic) IBOutlet UIButton *questionMCAnswer2;
