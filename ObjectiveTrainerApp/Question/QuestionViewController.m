@@ -16,6 +16,9 @@
     UIView *_tappablePortionOfImageQuestion;
     UITapGestureRecognizer *_tapRecognizer;
     UITapGestureRecognizer *_scrollViewTapGestureRecognizer;
+    
+    ResultView *_resultView;
+    UIView *_dimmedBackground;
 }
 @end
 
@@ -36,7 +39,7 @@
 	// Do any additional setup after loading the view.
     
     //Add tap gesture recognizer to scrollview
-    _scrollViewTapGestureRecognizer = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped)];
+    _scrollViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTapped)];
     [self.questionScrollView addGestureRecognizer:_scrollViewTapGestureRecognizer];
     
     //Add pan gesture recognizer for menu reveal
@@ -54,6 +57,39 @@
     //Display a random question
     [self randomizeQuestionForDisplay];
     
+    //Add background behind status bar
+    UIView *statusBarBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    statusBarBg.backgroundColor = [UIColor colorWithRed:11/255.0 green:187/255.0 blue:115/255.0 alpha:1.0];
+    [self.view addSubview:statusBarBg];
+    
+    //Set Button styles
+    UIColor *buttonBorderColor = [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1.0];
+    
+    [self.questionMCAnswer1.layer setBorderWidth:1.0];
+    [self.questionMCAnswer2.layer setBorderWidth:1.0];
+    [self.questionMCAnswer3.layer setBorderWidth:1.0];
+    [self.questionMCAnswer1.layer setBorderColor:buttonBorderColor.CGColor];
+    [self.questionMCAnswer2.layer setBorderColor:buttonBorderColor.CGColor];
+    [self.questionMCAnswer3.layer setBorderColor:buttonBorderColor.CGColor];
+    
+     
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    //call super implementation
+    [super viewDidAppear:animated];
+    
+    //Create result view
+    _resultView = [[ResultView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width - 20, self.view.frame.size.height - 20)];
+    //_resultView = [[ResultView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    _resultView.delegate = self;
+    
+    //Created dimmed bg
+    _dimmedBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    _dimmedBackground.backgroundColor = [UIColor blackColor];
+    _dimmedBackground.alpha = 0.3;
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,7 +106,6 @@
     self.questionMCAnswer3.hidden = YES;
     self.submitAnswerForBlankButton.hidden = YES;
     self.blankTextField.hidden = YES;
-    self.instructionLavelForBlank.hidden = YES;
     self.imageQuestionImageView.hidden= YES;
     
     //Remove the tappable uiview for the image questions
@@ -120,6 +155,12 @@
     self.questionMCAnswer3.hidden = NO;
 }
 
+- (IBAction)menuButtonTapped:(id)sender
+{
+    [self.revealViewController revealToggleAnimated:YES];
+    
+}
+
 - (void)displayImageQuestion
 {
     //Hide all elements
@@ -127,10 +168,11 @@
     
     //Set question elements
     
-    //Set Image and resize image view
+    //Set Image
     UIImage *tempImage =[UIImage imageNamed:_currentQuestion.questionImageName];
     self.imageQuestionImageView.image = tempImage;
    
+    //Resize imageview
     CGRect imageViewFrame = self.imageQuestionImageView.frame;
     imageViewFrame.size.height = tempImage.size.height;
     imageViewFrame.size.width = tempImage.size.width;
@@ -158,17 +200,25 @@
     //Hide all elements
     [self hideAllQuestionElements];
     
-    //Set question elements
-    self.questionText.text =_currentQuestion.questionText;
+    //Set question image for fill in the blank question
+    //Set Image
+    UIImage *tempImage =[UIImage imageNamed:_currentQuestion.questionImageName];
+    self.imageQuestionImageView.image = tempImage;
+    
+    //resize image view
+    CGRect imageViewFrame = self.imageQuestionImageView.frame;
+    imageViewFrame.size.height = tempImage.size.height;
+    imageViewFrame.size.width = tempImage.size.width;
+    self.imageQuestionImageView.frame = imageViewFrame;
+    
     
     //Adjust for scrollview
     self.questionScrollView.contentSize = CGSizeMake(self.questionScrollView.frame.size.width, self.skipButton.frame.origin.y + self.skipButton.frame.size.height + 30);
     
     //Revel object for Blank Questions
-    self.questionText.hidden = NO;
+    self.imageQuestionImageView.hidden = NO;
     self.submitAnswerForBlankButton.hidden = NO;
     self.blankTextField.hidden = NO;
-    self.instructionLavelForBlank.hidden = NO;
 }
 
 
@@ -196,18 +246,37 @@
     UIButton *selectedButton = (UIButton *)sender;
     BOOL isCorrect = NO;
     
+    NSString *userAnswer = @"";
+    switch (selectedButton.tag) {
+        case 1:
+            userAnswer = _currentQuestion.questionAnswer1;
+            break;
+        case 2:
+            userAnswer = _currentQuestion.questionAnswer2;
+            break;
+        case 3:
+            userAnswer = _currentQuestion.questionAnswer3;
+            break;
+        default:
+            break;
+    }
+    
     if (selectedButton.tag == _currentQuestion.correctMCQuestionIndex)
     {
         //User got it right
         isCorrect = YES;
-        
-        //TODO: display message for correct answer
-    
     }
     else
     {
         //User got it wrong
     }
+    
+    
+    //display message for correct answer
+    [_resultView showResultForTextQuestion:isCorrect userAnswer:userAnswer forQuestion:_currentQuestion];
+    [self.view addSubview:_dimmedBackground];
+    [self.view addSubview:_resultView];
+    
     
     //Save the question data
     [self saveQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
@@ -219,7 +288,11 @@
 
 -(void)imageQuestionAnswered
 {
-    //TODO: display message for correct answer
+    // display message for correct answer
+    [_resultView showResultForImageQuestion:YES forQuestion:_currentQuestion];
+    [self.view addSubview:_dimmedBackground];
+    [self.view addSubview:_resultView];
+    
     
     [self saveQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:YES];
     
@@ -229,19 +302,35 @@
 
 - (IBAction)blankSubmitted:(id)sender
 {
+    //Retract keyboard
+    [self.blankTextField resignFirstResponder];
+    
+    //Get answer
     NSString *answer = self.blankTextField.text;
     BOOL isCorrect = NO;
     
-    
-    if ([answer isEqualToString:_currentQuestion.correctAnswerForBlank]) {
+    //Check if answer is right
+    if ([answer isEqualToString:_currentQuestion.correctAnswerForBlank])
+    {
         //User got it right
         isCorrect = YES;
+        
+        
+        
     }
     else
     {
         //User got it wrong
     }
-
+    
+    //Clear the text field
+    self.blankTextField.text = @"";
+    
+    //Display messsage for answer
+    [_resultView showResultForImageQuestion:YES forQuestion:_currentQuestion];
+    [self.view addSubview:_dimmedBackground];
+    [self.view addSubview:_resultView];
+    
     //Record Question Data
     [self saveQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
     
@@ -317,7 +406,16 @@
 
 - (void)scrollViewTapped
 {
+    //Retract keyboard
     [self.blankTextField resignFirstResponder];
+}
+
+#pragma mark Result View Delegate Methods
+
+-(void)resultViewDismissed
+{
+    [_dimmedBackground removeFromSuperview];
+    [_resultView removeFromSuperview];
 }
 
 @end

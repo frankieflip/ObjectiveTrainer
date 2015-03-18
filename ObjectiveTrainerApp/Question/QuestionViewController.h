@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "QuestionModel.h"
 #import "Question.h"
+#import "ResultView.h"
 
-@interface QuestionViewController : UIViewController
+@interface QuestionViewController : UIViewController<ResultViewProtocol>
 
 @property (strong, nonatomic) QuestionModel *model;
 @property (strong, nonatomic) NSArray *questions;
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *questionScrollView;
 
 //Properties for MCQuestions
+@property (weak, nonatomic) IBOutlet UILabel *questionHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *questionText;
 @property (weak, nonatomic) IBOutlet UIButton *questionMCAnswer1;
 @property (weak, nonatomic) IBOutlet UIButton *questionMCAnswer2;
@@ -28,7 +30,6 @@
 //Properties for Blank Questions
 @property (weak, nonatomic) IBOutlet UIButton *submitAnswerForBlankButton;
 @property (weak, nonatomic) IBOutlet UITextField *blankTextField;
-@property (weak, nonatomic) IBOutlet UILabel *instructionLavelForBlank;
 
 //Properties for Image Questions
 @property (weak, nonatomic) IBOutlet UIImageView *imageQuestionImageView;

@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012ADA261AB1D93700146693 /* ResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ADA251AB1D93700146693 /* ResultView.m */; };
 		01A4D0C51AAAF1BB00A80F59 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4D0C41AAAF1BB00A80F59 /* Question.m */; };
 		01A763AD1AAF2969002E7973 /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A763AC1AAF2969002E7973 /* questions.json */; };
+		01B8CBFF1AB33A5D006C7348 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8CBFE1AB33A5D006C7348 /* MessageUI.framework */; };
 		50AB57C118E74FD0006EE06F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AB57C018E74FD0006EE06F /* Foundation.framework */; };
 		50AB57C318E74FD0006EE06F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AB57C218E74FD0006EE06F /* CoreGraphics.framework */; };
 		50AB57C518E74FD0006EE06F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AB57C418E74FD0006EE06F /* UIKit.framework */; };
@@ -45,9 +47,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		012ADA241AB1D93700146693 /* ResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultView.h; sourceTree = "<group>"; };
+		012ADA251AB1D93700146693 /* ResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultView.m; sourceTree = "<group>"; };
 		01A4D0C31AAAF1BB00A80F59 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		01A4D0C41AAAF1BB00A80F59 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		01A763AC1AAF2969002E7973 /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
+		01B8CBFE1AB33A5D006C7348 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		50AB57BD18E74FD0006EE06F /* ObjectiveTrainerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveTrainerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50AB57C018E74FD0006EE06F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		50AB57C218E74FD0006EE06F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B8CBFF1AB33A5D006C7348 /* MessageUI.framework in Frameworks */,
 				50AB57C318E74FD0006EE06F /* CoreGraphics.framework in Frameworks */,
 				50AB57C518E74FD0006EE06F /* UIKit.framework in Frameworks */,
 				50AB57C118E74FD0006EE06F /* Foundation.framework in Frameworks */,
@@ -133,6 +139,7 @@
 		50AB57BF18E74FD0006EE06F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01B8CBFE1AB33A5D006C7348 /* MessageUI.framework */,
 				50AB57C018E74FD0006EE06F /* Foundation.framework */,
 				50AB57C218E74FD0006EE06F /* CoreGraphics.framework */,
 				50AB57C418E74FD0006EE06F /* UIKit.framework */,
@@ -208,6 +215,8 @@
 				50AB580318E751C0006EE06F /* QuestionModel.m */,
 				50AB57FF18E751B0006EE06F /* QuestionViewController.h */,
 				50AB580018E751B0006EE06F /* QuestionViewController.m */,
+				012ADA241AB1D93700146693 /* ResultView.h */,
+				012ADA251AB1D93700146693 /* ResultView.m */,
 			);
 			name = Question;
 			sourceTree = "<group>";
@@ -360,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50AB580418E751C0006EE06F /* QuestionModel.m in Sources */,
+				012ADA261AB1D93700146693 /* ResultView.m in Sources */,
 				01A4D0C51AAAF1BB00A80F59 /* Question.m in Sources */,
 				50AB580A18E751E5006EE06F /* MenuModel.m in Sources */,
 				50AB580D18E751FE006EE06F /* AboutViewController.m in Sources */,

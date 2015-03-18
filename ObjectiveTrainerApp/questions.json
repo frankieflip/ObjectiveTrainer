@@ -45,6 +45,24 @@
 		"x_coord" : 150,
 		"y_coord" : 30, 
 		"answerimage" : "EasyAnswerImage003"
+		},
+		{
+		"type" : "blank",
+		"imagename" : "EasyBlank001",
+		"answerimage" : "EasyAnswerBlank001",
+		"answer" : "shorts"
+		},
+		{
+		"type" : "blank",
+		"imagename" : "EasyBlank002",
+		"answerimage" : "EasyAnswerBlank002",
+		"answer" : "smell"
+		},
+		{
+		"type" : "blank",
+		"imagename" : "EasyBlank003",
+		"answerimage" : "EasyAnswerBlank003",
+		"answer" : "episode"
 		}
 	],
 	"medium" : [],
