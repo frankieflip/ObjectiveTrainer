@@ -89,7 +89,7 @@
     //Created dimmed bg
     _dimmedBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     _dimmedBackground.backgroundColor = [UIColor blackColor];
-    _dimmedBackground.alpha = 0.3;
+    _dimmedBackground.alpha = 0.4;
 }
 
 - (void)didReceiveMemoryWarning
@@ -471,15 +471,9 @@
     
     //display message for correct answer
     [_resultView showResultForTextQuestion:isCorrect userAnswer:userAnswer forQuestion:_currentQuestion];
-    [self.view addSubview:_dimmedBackground];
-    [self.view addSubview:_resultView];
-    
     
     //Save the question data
     [self saveQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
-    
-    //Randomize and go to next question
-    [self randomizeQuestionForDisplay];
     
 }
 
@@ -487,14 +481,9 @@
 {
     // display message for correct answer
     [_resultView showResultForImageQuestion:YES forQuestion:_currentQuestion];
-    [self.view addSubview:_dimmedBackground];
-    [self.view addSubview:_resultView];
-    
     
     [self saveQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:YES];
-    
-    //Randomize and go to next question
-    [self randomizeQuestionForDisplay];
+
 }
 
 - (IBAction)blankSubmitted:(id)sender
@@ -513,7 +502,6 @@
         isCorrect = YES;
         
         
-        
     }
     else
     {
@@ -525,14 +513,10 @@
     
     //Display messsage for answer
     [_resultView showResultForImageQuestion:YES forQuestion:_currentQuestion];
-    [self.view addSubview:_dimmedBackground];
-    [self.view addSubview:_resultView];
     
     //Record Question Data
     [self saveQuestionData:_currentQuestion.questionType withDifficulty:_currentQuestion.questionDifficulty isCorrect:isCorrect];
     
-    //Randomize and go to next question
-    [self randomizeQuestionForDisplay];
 }
 
 - (void)saveQuestionData:(QuizQuestionType)type withDifficulty:(QuizQuestionDifficulty)difficulty isCorrect:(BOOL)correct
@@ -611,8 +595,86 @@
 
 -(void)resultViewDismissed
 {
-    [_dimmedBackground removeFromSuperview];
-    [_resultView removeFromSuperview];
+    //Animate it into view
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void){
+                         
+                         _dimmedBackground.alpha = 0;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         [_dimmedBackground removeFromSuperview];
+                     }];
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void){
+                         
+                         CGRect resultViewFrame = _resultView.frame;
+                         resultViewFrame.origin.y = 2000;
+                         _resultView.frame = resultViewFrame;
+                         
+                     }
+                     completion:^(BOOL finished){
+                         [UIView animateWithDuration:0.5
+                                               delay:0
+                                             options:UIViewAnimationOptionCurveEaseIn
+                                          animations:^(void){
+                                              
+                                              [self hideAllQuestionElements];
+                                              
+                                          }
+                                          completion:^(BOOL finished){
+                                              
+                                              //Display next question
+                                              [self randomizeQuestionForDisplay];
+                                              
+                                          }
+                          ];
+                         [_resultView removeFromSuperview];
+                     }];
+    
+    
+}
+
+-(void)resultViewHeightDetermined
+{
+    //Fade in dimmed background
+    _dimmedBackground.alpha = 0;
+    [self.view addSubview:_dimmedBackground];
+    
+    //Position result view below screen
+    CGRect resultViewFrame = _resultView.frame;
+    resultViewFrame.origin.y = 2000;
+    _resultView.frame = resultViewFrame;
+    
+    [self.view addSubview:_resultView];
+    
+    //Animate it into view
+    [UIView animateWithDuration:0.3
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void){
+                         
+                         _dimmedBackground.alpha = 0.4;
+                         
+                     }
+                     completion:nil];
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^(void){
+                         
+                         CGRect resultViewFrame = _resultView.frame;
+                         resultViewFrame.origin.y = (self.view.frame.size.height - _resultView.frame.size.height)/2;
+                         _resultView.frame = resultViewFrame;
+                         
+                     }
+                     completion:nil];
 }
 
 @end

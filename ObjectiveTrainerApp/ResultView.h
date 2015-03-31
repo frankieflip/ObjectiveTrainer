@@ -11,6 +11,7 @@
 
 @protocol ResultViewProtocol <NSObject>
 
+- (void)resultViewHeightDetermined;
 - (void)resultViewDismissed;
 
 @end
@@ -21,6 +22,7 @@
 
 //Label to display correct or incorrect
 @property (nonatomic,strong) UILabel *resultLabel;
+@property (nonatomic,strong) UIView *resultLabelBackgroundView;
 
 //Label to display correct answer for text based questions
 @property (nonatomic,strong) UILabel *correctAnswerLabel;
