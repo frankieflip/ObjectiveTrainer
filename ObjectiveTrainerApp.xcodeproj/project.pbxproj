@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		012ADA261AB1D93700146693 /* ResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ADA251AB1D93700146693 /* ResultView.m */; };
+		01A2E87A1ACB73130097DD35 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A2E8791ACB73130097DD35 /* iAd.framework */; };
 		01A4D0C51AAAF1BB00A80F59 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A4D0C41AAAF1BB00A80F59 /* Question.m */; };
 		01A763AD1AAF2969002E7973 /* questions.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A763AC1AAF2969002E7973 /* questions.json */; };
 		01B8CBFF1AB33A5D006C7348 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B8CBFE1AB33A5D006C7348 /* MessageUI.framework */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		012ADA241AB1D93700146693 /* ResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultView.h; sourceTree = "<group>"; };
 		012ADA251AB1D93700146693 /* ResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultView.m; sourceTree = "<group>"; };
+		01A2E8791ACB73130097DD35 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		01A4D0C31AAAF1BB00A80F59 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		01A4D0C41AAAF1BB00A80F59 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		01A763AC1AAF2969002E7973 /* questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = questions.json; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A2E87A1ACB73130097DD35 /* iAd.framework in Frameworks */,
 				01B8CBFF1AB33A5D006C7348 /* MessageUI.framework in Frameworks */,
 				50AB57C318E74FD0006EE06F /* CoreGraphics.framework in Frameworks */,
 				50AB57C518E74FD0006EE06F /* UIKit.framework in Frameworks */,
@@ -139,6 +142,7 @@
 		50AB57BF18E74FD0006EE06F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01A2E8791ACB73130097DD35 /* iAd.framework */,
 				01B8CBFE1AB33A5D006C7348 /* MessageUI.framework */,
 				50AB57C018E74FD0006EE06F /* Foundation.framework */,
 				50AB57C218E74FD0006EE06F /* CoreGraphics.framework */,
